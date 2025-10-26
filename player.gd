@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
 # === MOVEMENT CONSTANTS ===
-const SPEED = 300.0
-const JUMP_VELOCITY = -600.0  # For Lesson 2!
+const SPEED = 200.0
+const JUMP_VELOCITY = -500.0  # For Lesson 2!
 var jump_released = false
-const MAX_JUMPS = 2
+const MAX_JUMPS = 5
 var jump_count = 0
 
 
