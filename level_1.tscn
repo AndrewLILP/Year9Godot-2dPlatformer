@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://w1fbkqmuwt5i"]
+
+[ext_resource type="PackedScene" uid="uid://d3h7ycsgals16" path="res://platform.tscn" id="1_3hls8"]
+[ext_resource type="Texture2D" uid="uid://derfi5t0gsj44" path="res://icon.svg" id="2_hbghi"]
+[ext_resource type="Script" uid="uid://dl3kfni5o6f2c" path="res://player.gd" id="2_hn12h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hn12h"]
+size = Vector2(124, 119)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ihfcg"]
+size = Vector2(97, 84)
+
+[node name="Level_1" type="Node2D"]
+
+[node name="Platform" parent="." instance=ExtResource("1_3hls8")]
+position = Vector2(11, 298)
+
+[node name="Platform2" parent="." instance=ExtResource("1_3hls8")]
+position = Vector2(536, 551)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("2_hn12h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(64, 63.5)
+shape = SubResource("RectangleShape2D_hn12h")
+
+[node name="Icon" type="Sprite2D" parent="Player"]
+position = Vector2(64, 63)
+texture = ExtResource("2_hbghi")
+
+[node name="GoalBox" type="Area2D" parent="."]
+position = Vector2(1012, 463)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalBox"]
+position = Vector2(38.5, 32)
+shape = SubResource("RectangleShape2D_ihfcg")
+
+[node name="ColorRect" type="ColorRect" parent="GoalBox/CollisionShape2D"]
+offset_left = -44.499996
+offset_top = -46.0
+offset_right = -4.499996
+offset_bottom = -6.0
+scale = Vector2(2.0757897, 2.1869388)
+color = Color(0.6991475, 0.6835499, 0, 1)
