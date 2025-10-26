@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://w1fbkqmuwt5i"]
+[gd_scene load_steps=8 format=3 uid="uid://w1fbkqmuwt5i"]
 
 [ext_resource type="PackedScene" uid="uid://d3h7ycsgals16" path="res://platform.tscn" id="1_3hls8"]
+[ext_resource type="Script" uid="uid://l0ut0uqxh331" path="res://level_1.gd" id="1_ihfcg"]
 [ext_resource type="Texture2D" uid="uid://derfi5t0gsj44" path="res://icon.svg" id="2_hbghi"]
 [ext_resource type="Script" uid="uid://dl3kfni5o6f2c" path="res://player.gd" id="2_hn12h"]
+[ext_resource type="PackedScene" uid="uid://cxjxi4340jgef" path="res://coin.tscn" id="5_rka8t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hn12h"]
 size = Vector2(124, 119)
@@ -11,6 +13,7 @@ size = Vector2(124, 119)
 size = Vector2(97, 84)
 
 [node name="Level_1" type="Node2D"]
+script = ExtResource("1_ihfcg")
 
 [node name="Platform" parent="." instance=ExtResource("1_3hls8")]
 position = Vector2(11, 298)
@@ -43,3 +46,14 @@ offset_right = -4.499996
 offset_bottom = -6.0
 scale = Vector2(2.0757897, 2.1869388)
 color = Color(0.6991475, 0.6835499, 0, 1)
+
+[node name="Coin" parent="." groups=["coins"] instance=ExtResource("5_rka8t")]
+position = Vector2(514, 255)
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 808.0
+offset_top = 47.0
+offset_right = 848.0
+offset_bottom = 70.0
+scale = Vector2(3.5999985, 2.8400002)
+text = "Coins Collected: "

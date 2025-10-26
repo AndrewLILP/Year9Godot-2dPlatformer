@@ -1,3 +1,16 @@
 [gd_scene format=3 uid="uid://cehk1rpr7qby4"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Level_2" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(8.68, 4.4)
+text = "Level 2"
+
+[node name="Label2" type="Label" parent="."]
+offset_top = 148.0
+offset_right = 54.0
+offset_bottom = 171.0
+scale = Vector2(3.1600003, 3.44)
+text = "Level 2"
