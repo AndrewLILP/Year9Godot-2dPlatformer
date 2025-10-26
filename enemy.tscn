@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdvumpmkcd5gk"]
+
+[ext_resource type="Script" uid="uid://bdi0ev7r6omt" path="res://enemy.gd" id="1_7k104"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xaro"]
+size = Vector2(85, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
+size = Vector2(76, 92)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_7k104")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32.5, 13)
+scale = Vector2(1, 0.8717949)
+shape = SubResource("RectangleShape2D_7xaro")
+
+[node name="ColorRect" type="ColorRect" parent="CollisionShape2D"]
+offset_left = -38.5
+offset_top = -41.0
+offset_right = 1.5
+offset_bottom = -1.0
+scale = Vector2(1.8399999, 1.76)
+color = Color(0.509432, 0.41491625, 0.2670991, 1)
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(-19, -8)
+scale = Vector2(2.04, 1)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(28, 13)
+shape = SubResource("RectangleShape2D_7k104")
