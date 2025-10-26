@@ -1,16 +1,59 @@
-[gd_scene format=3 uid="uid://cehk1rpr7qby4"]
+[gd_scene load_steps=6 format=3 uid="uid://cehk1rpr7qby4"]
+
+[ext_resource type="Script" uid="uid://clmcvn6wylwrw" path="res://player_level_2.gd" id="1_jg0dc"]
+[ext_resource type="Texture2D" uid="uid://derfi5t0gsj44" path="res://icon.svg" id="2_xdadj"]
+[ext_resource type="PackedScene" uid="uid://d3h7ycsgals16" path="res://platform.tscn" id="3_1y8me"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a72st"]
+size = Vector2(158.33333, 145.875)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdadj"]
 
 [node name="Level_2" type="Node2D"]
 
 [node name="Label" type="Label" parent="."]
-offset_right = 40.0
+offset_left = 906.0
+offset_right = 960.0
 offset_bottom = 23.0
 scale = Vector2(8.68, 4.4)
 text = "Level 2"
 
 [node name="Label2" type="Label" parent="."]
+offset_left = 906.0
 offset_top = 148.0
-offset_right = 54.0
+offset_right = 960.0
 offset_bottom = 171.0
 scale = Vector2(3.1600003, 3.44)
 text = "Level 2"
+
+[node name="PlayerLevel2" type="CharacterBody2D" parent="."]
+scale = Vector2(0.36, 0.32)
+script = ExtResource("1_jg0dc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerLevel2"]
+position = Vector2(45.833332, 1.0625005)
+shape = SubResource("RectangleShape2D_a72st")
+
+[node name="Icon" type="Sprite2D" parent="PlayerLevel2"]
+position = Vector2(52, 13)
+texture = ExtResource("2_xdadj")
+
+[node name="Platform" parent="." instance=ExtResource("3_1y8me")]
+position = Vector2(776, 679)
+
+[node name="Platform2" parent="." instance=ExtResource("3_1y8me")]
+position = Vector2(222, 479)
+
+[node name="Platform3" parent="." instance=ExtResource("3_1y8me")]
+position = Vector2(11, 190)
+
+[node name="GoalBox" type="Area2D" parent="."]
+position = Vector2(1269, 624)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalBox"]
+shape = SubResource("RectangleShape2D_xdadj")
+
+[node name="ColorRect" type="ColorRect" parent="GoalBox/CollisionShape2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.46799618, 0.4562357, 1.92523e-07, 1)
