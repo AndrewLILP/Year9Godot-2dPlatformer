@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://bu23wquhge4ok"]
+
+[ext_resource type="Texture2D" uid="uid://derfi5t0gsj44" path="res://icon.svg" id="1_t8ca6"]
+[ext_resource type="Script" uid="uid://babl4x572vo5v" path="res://SideQuests/player_teleport.gd" id="1_tmede"]
+[ext_resource type="Script" uid="uid://b1mdvtwdgjlrg" path="res://SideQuests/teleporter.gd" id="3_7l37v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tmede"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8ca6"]
+size = Vector2(71.16449, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7l37v"]
+size = Vector2(60, 38.494637)
+
+[node name="TeleportScene" type="Node2D"]
+
+[node name="PlayerTeleport" type="CharacterBody2D" parent="."]
+position = Vector2(70, 71)
+script = ExtResource("1_tmede")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerTeleport"]
+scale = Vector2(7.2800016, 6.4400005)
+shape = SubResource("RectangleShape2D_tmede")
+
+[node name="Icon" type="Sprite2D" parent="PlayerTeleport"]
+position = Vector2(1, -1)
+texture = ExtResource("1_t8ca6")
+
+[node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2(11, 393)
+scale = Vector2(21.64, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(34.380768, 41)
+scale = Vector2(1, 1.9200013)
+shape = SubResource("RectangleShape2D_t8ca6")
+
+[node name="ColorRect" type="ColorRect" parent="Platform"]
+offset_left = -0.64695007
+offset_top = 25.0
+offset_right = 39.35305
+offset_bottom = 65.0
+scale = Vector2(1.783734, 1)
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(11, 683)
+scale = Vector2(21.64, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+position = Vector2(34.380768, 41)
+scale = Vector2(1, 1.9200013)
+shape = SubResource("RectangleShape2D_t8ca6")
+
+[node name="ColorRect" type="ColorRect" parent="Platform2"]
+offset_left = -0.64695007
+offset_top = 25.0
+offset_right = 39.35305
+offset_bottom = 65.0
+scale = Vector2(1.783734, 1)
+
+[node name="Teleporter" type="Area2D" parent="."]
+position = Vector2(1243, 306)
+scale = Vector2(4.44, 3.7199988)
+script = ExtResource("3_7l37v")
+destination_position = Vector2(500, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Teleporter"]
+position = Vector2(20, 9.247322)
+scale = Vector2(1, 1.0000001)
+shape = SubResource("RectangleShape2D_7l37v")
+
+[node name="Marker2D" type="Marker2D" parent="Teleporter"]
+position = Vector2(5.4053984, 4.032261)
+
+[node name="ColorRect" type="ColorRect" parent="Teleporter"]
+offset_left = -6.9819927
+offset_top = -10.752691
+offset_right = 33.018005
+offset_bottom = 29.247309
+color = Color(0.3088639, 7.5950324e-05, 0.31609368, 1)
