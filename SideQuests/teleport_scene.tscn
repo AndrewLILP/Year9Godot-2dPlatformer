@@ -26,6 +26,14 @@ shape = SubResource("RectangleShape2D_tmede")
 position = Vector2(1, -1)
 texture = ExtResource("1_t8ca6")
 
+[node name="Camera2D" type="Camera2D" parent="PlayerTeleport"]
+limit_left = 0
+limit_top = 0
+limit_right = 5000
+limit_bottom = 1000
+limit_smoothed = true
+position_smoothing_enabled = true
+
 [node name="Platform" type="StaticBody2D" parent="."]
 position = Vector2(11, 393)
 scale = Vector2(21.64, 1)
@@ -44,7 +52,7 @@ scale = Vector2(1.783734, 1)
 
 [node name="Platform2" type="StaticBody2D" parent="."]
 position = Vector2(11, 683)
-scale = Vector2(21.64, 1)
+scale = Vector2(73.479996, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
 position = Vector2(34.380768, 41)
