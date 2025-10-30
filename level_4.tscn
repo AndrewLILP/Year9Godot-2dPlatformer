@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://bjgjsh7ufyem7"]
+
+[ext_resource type="PackedScene" uid="uid://d3h7ycsgals16" path="res://platform.tscn" id="1_5pu08"]
+[ext_resource type="Texture2D" uid="uid://derfi5t0gsj44" path="res://icon.svg" id="2_na6m6"]
+[ext_resource type="Script" uid="uid://ccj6h2n3dawfp" path="res://player_l_4.gd" id="2_xcfcc"]
+[ext_resource type="Texture2D" uid="uid://dupn6m36xs1fo" path="res://assets/Walking.png" id="4_48hld"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xcfcc"]
+size = Vector2(132, 134)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l45re"]
+atlas = ExtResource("4_48hld")
+region = Rect2(0, 0, 255, 203)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8stx"]
+atlas = ExtResource("4_48hld")
+region = Rect2(255, 0, 255, 203)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48hld"]
+atlas = ExtResource("4_48hld")
+region = Rect2(255, 0, 255, 203)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqy51"]
+atlas = ExtResource("4_48hld")
+region = Rect2(255, 0, 255, 203)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aqy51"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l45re")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8stx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48hld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqy51")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="level_4" type="Node2D"]
+
+[node name="Platform" parent="." instance=ExtResource("1_5pu08")]
+position = Vector2(11, 275)
+
+[node name="PlayerL4" type="CharacterBody2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+script = ExtResource("2_xcfcc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerL4"]
+position = Vector2(56, 57)
+shape = SubResource("RectangleShape2D_xcfcc")
+
+[node name="Icon" type="Sprite2D" parent="PlayerL4"]
+visible = false
+position = Vector2(54, 55)
+texture = ExtResource("2_na6m6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerL4"]
+texture_filter = 2
+texture_repeat = 1
+sprite_frames = SubResource("SpriteFrames_aqy51")
+animation = &"walk"
+frame_progress = 0.50093806
