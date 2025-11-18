@@ -1,69 +1,80 @@
 # enemy.gd
+# AI-controlled enemy that patrols and damages player
+# Inherits movement, health, and physics from Character
+extends Character
 
-extends CharacterBody2D
-
-# === MOVEMENT CONSTANTS ===
-# How fast the enemy moves (pixels per second)
+# === ENEMY CONSTANTS ===
 const SPEED = 100.0
+const MOVE_TIME = 2.0  # Seconds before turning around
 
-# === MOVEMENT VARIABLES ===
-# Current direction: 1 = moving right, -1 = moving left
-var direction = 1
-
-# Timer to track when to turn around
+# === PATROL VARIABLES ===
 var move_timer = 0.0
 
-# How long to move in each direction (in seconds)
-const MOVE_TIME = 2.0
-
 # === INITIALIZATION ===
-# Called once when enemy is created
 func _ready():
-	print("=== ENEMY SPAWNED ===")
+	# Call parent initialization
+	super._ready()
 	
-	# Connect HitBox signal if it exists
+	# Enemy-specific setup
+	max_health = 1
+	current_health = 1
+	
+	# Connect HitBox for player detection
 	if has_node("HitBox"):
-		print("✓ HitBox found and connected!")
-		# Connect the signal to detect player collision
 		$HitBox.body_entered.connect(_on_hit_box_body_entered)
+		print(name, " HitBox connected")
 	else:
-		print("✗ ERROR: HitBox not found!")
+		print("WARNING: ", name, " has no HitBox!")
 
-# === MAIN PHYSICS FUNCTION ===
-# Called every frame (delta = time since last frame)
+# === ENEMY AI ===
 func _physics_process(delta):
-	# --- APPLY GRAVITY ---
-	# Make enemy fall if not on ground
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	# --- GRAVITY (from parent) ---
+	apply_gravity(delta)
 	
-	# --- MOVE IN CURRENT DIRECTION ---
-	# Multiply direction (1 or -1) by SPEED to get velocity
-	velocity.x = direction * SPEED
+	# --- PATROL MOVEMENT (enemy-specific) ---
+	velocity.x = facing_direction * SPEED
 	
-	# --- COUNT UP THE TIMER ---
-	# Add elapsed time to the timer
+	# Count up timer
 	move_timer += delta
 	
-	# --- CHECK IF TIME TO TURN AROUND ---
+	# Turn around when timer expires
 	if move_timer >= MOVE_TIME:
-		# Time's up! Reverse direction
-		direction *= -1  # Flip: 1 becomes -1, -1 becomes 1
-		move_timer = 0.0  # Reset timer back to zero
-		print("Enemy turned! Now moving: ", "RIGHT" if direction == 1 else "LEFT")
+		facing_direction *= -1  # Reverse: 1 becomes -1, -1 becomes 1
+		move_timer = 0.0  # Reset timer
+		print(name, " turned around!")
 	
-	# --- EXECUTE THE MOVEMENT ---
-	# Actually move the enemy based on velocity
-	move_and_slide()
+	# --- ANIMATION (enemy-specific) ---
+	if has_node("AnimatedSprite2D"):
+		if abs(velocity.x) > 10:
+			$AnimatedSprite2D.play("walk")
+		else:
+			$AnimatedSprite2D.play("idle")
+	
+	# Flip sprite to face movement direction
+	update_facing_direction()
+	
+	# --- EXECUTE MOVEMENT (from parent) ---
+	apply_movement()
 
 # === PLAYER COLLISION ===
-# Called when something enters the HitBox
 func _on_hit_box_body_entered(body):
-	print("Something hit the enemy: ", body.name)
+	print(name, " detected collision with: ", body.name)
 	
-	# Check if "Player" is anywhere in the body's name
-	# This works for: Player, Player2, PlayerL2, etc.
+	# Check if it's the player
 	if "Player" in body.name:
-		print("💀 Player hit enemy! Restarting level...")
-		# Use call_deferred to safely reload after physics finishes
-		get_tree().call_deferred("reload_current_scene")
+		print("Player hit enemy!")
+		
+		# Damage the player using inherited take_damage function
+		if body.has_method("take_damage"):
+			body.take_damage(1)
+		else:
+			# Fallback: Restart level if no health system
+			print("Player has no take_damage method, restarting level")
+			get_tree().call_deferred("reload_current_scene")
+
+# === CUSTOM DEATH BEHAVIOR ===
+# Override parent's die() function
+func die() -> void:
+	print(name, " was defeated!")
+	# TODO: Later add coin drops, particles, etc.
+	queue_free()

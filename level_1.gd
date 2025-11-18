@@ -20,7 +20,7 @@ func _on_coin_collected():
 	score += 1
 	
 	# Update the UI display
-	$ScoreLabel.text = "Coins Collected: " + str(score)
+	$UI/ScoreLabel.text = "Coins Collected: " + str(score)
 	
 	# Print to console for debugging
 	print("Score: " + str(score))

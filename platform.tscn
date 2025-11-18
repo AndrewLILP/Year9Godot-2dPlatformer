@@ -4,6 +4,8 @@
 size = Vector2(542, 104)
 
 [node name="Platform" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(261, 42)
@@ -14,3 +16,4 @@ offset_left = -272.0
 offset_top = -53.0
 offset_right = 272.0
 offset_bottom = 52.0
+color = Color(0.16769889, 2.2067949e-05, 0.1706424, 1)
