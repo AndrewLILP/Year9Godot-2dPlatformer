@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://rtbc3538ywbe"]
+
+[ext_resource type="Script" uid="uid://bj0jygag5npvw" path="res://hud.gd" id="1_37p78"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_37p78")
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(3.2400002, 3.08)
+theme_override_font_sizes/font_size = 24
+text = "Score: 0"
+
+[node name="LivesLabel" type="Label" parent="."]
+offset_top = 117.0
+offset_right = 85.0
+offset_bottom = 151.0
+scale = Vector2(3.5849252, 3.2183678)
+theme_override_font_sizes/font_size = 24
+text = "Lives: 3"
+
+[node name="LevelLabel" type="Label" parent="."]
+offset_left = 1118.0
+offset_right = 1205.0
+offset_bottom = 34.0
+scale = Vector2(3.1200025, 3.12)
+theme_override_font_sizes/font_size = 24
+text = "Level: 1"
+horizontal_alignment = 2

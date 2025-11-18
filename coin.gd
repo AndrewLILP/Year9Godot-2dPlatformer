@@ -1,23 +1,18 @@
+# coin.gd - UPDATE THIS
 extends Area2D
 
-# === SIGNAL DEFINITION ===
-# This signal announces "A coin was collected!"
-# Other scripts can listen for this event
-signal coin_collected
+# How many points this coin is worth
+@export var point_value: int = 1
 
-# === INITIALIZATION ===
 func _ready():
-	# Connect our collision detection to our response function
-	# When something enters our area, call _on_body_entered
 	body_entered.connect(_on_body_entered)
 
-# === COLLISION DETECTION ===
-# This function runs when ANY body touches the coin
 func _on_body_entered(body):
-	# Check if the body that touched us is named "Player"
-	if body.name == "Player":
-		# Announce that this coin was collected
-		coin_collected.emit()
+	if "Player" in body.name:
+		# ★ NEW: Add score to GameManager (persists between levels!)
+		GameManager.add_score(point_value)
 		
-		# Delete this coin from the game
+		print("💰 Coin collected! +", point_value, " points")
+		
+		# Remove coin
 		queue_free()

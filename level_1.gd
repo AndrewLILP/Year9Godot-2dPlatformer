@@ -6,18 +6,19 @@ var score = 0
 
 # === INITIALIZATION ===
 func _ready():
-	# Find ALL coin instances in this level
-	var coins = get_tree().get_nodes_in_group("coins")
+	# game_manager does this now
+	
+	# var coins = get_tree().get_nodes_in_group("coins")
 	
 	# Connect to each coin's signal
-	for coin in coins:
-		coin.coin_collected.connect(_on_coin_collected)
+	# for coin in coins:
+		# coin.coin_collected.connect(_on_coin_collected)
 
 # === COIN COLLECTION RESPONSE ===
 # This function runs whenever ANY coin emits its signal
-func _on_coin_collected():
+# func _on_coin_collected():
 	# Increase score by 1
-	score += 1
+	# score += 1
 	
 	# Update the UI display
 	$UI/ScoreLabel.text = "Coins Collected: " + str(score)

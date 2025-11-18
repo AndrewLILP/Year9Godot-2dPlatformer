@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://hgsb60p1hgs1"]
+
+[ext_resource type="Script" uid="uid://bbiw07q4qjljw" path="res://goal_box.gd" id="1_ewwye"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1u1uo"]
+
+[node name="GoalBox" type="Area2D"]
+collision_layer = 5
+script = ExtResource("1_ewwye")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(6, 6)
+shape = SubResource("RectangleShape2D_1u1uo")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -60.0
+offset_top = -57.0
+offset_right = 58.0
+offset_bottom = 58.0
+color = Color(0.46741796, 0.0001626338, 0.4711309, 1)
