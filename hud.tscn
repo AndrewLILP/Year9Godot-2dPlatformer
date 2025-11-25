@@ -6,19 +6,22 @@
 script = ExtResource("1_37p78")
 
 [node name="ScoreLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 23.000002
+offset_right = 114.0
+offset_bottom = 34.0
 scale = Vector2(3.2400002, 3.08)
 theme_override_font_sizes/font_size = 24
 text = "Score: 0"
 
 [node name="LivesLabel" type="Label" parent="."]
-offset_top = 117.0
-offset_right = 85.0
-offset_bottom = 151.0
+offset_left = 19.000244
+offset_top = 656.0
+offset_right = 104.000244
+offset_bottom = 690.0
 scale = Vector2(3.5849252, 3.2183678)
 theme_override_font_sizes/font_size = 24
 text = "Lives: 3"
+vertical_alignment = 2
 
 [node name="LevelLabel" type="Label" parent="."]
 offset_left = 1118.0

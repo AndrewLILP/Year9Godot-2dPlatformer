@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://mskduxvueh8x"]
+
+[ext_resource type="Script" uid="uid://dtqfkk86hmxs0" path="res://SideQuests/moving_platform_animatable_body_2d.gd" id="1_aew2w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yk15u"]
+size = Vector2(349, 86)
+
+[node name="MovingPlatformAnimatableBody2D" type="AnimatableBody2D"]
+position = Vector2(552, 0)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_aew2w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(164.5, 33)
+shape = SubResource("RectangleShape2D_yk15u")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -11.0
+offset_top = -7.0
+offset_right = 339.0
+offset_bottom = 76.0
+color = Color(0, 0.85124075, 0.8531043, 1)
+
+[node name="StartPoint" type="Marker2D" parent="."]
+
+[node name="EndPoint" type="Marker2D" parent="."]
+position = Vector2(300, 0)

@@ -5,7 +5,14 @@ extends Character
 
 # === PLAYER CONSTANTS ===
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -600.0
+
+# === GRAVITY MULTIPLIER ===
+# Allows external scripts (like gravity button) to flip gravity direction
+# 1.0 = normal downward gravity
+# -1.0 = flipped upward gravity
+# This variable is modified by the GravityButton script
+#var gravity_multiplier: float = 1.0
 
 # === INITIALIZATION ===
 func _ready():
@@ -37,7 +44,7 @@ func _physics_process(delta):
 	
 	# --- ★ JUMP (player-specific) ---
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = JUMP_VELOCITY * gravity_multiplier
 		print("🦘 Jump!")
 	
 	# --- MOVEMENT INPUT (player-specific) ---

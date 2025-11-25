@@ -11,6 +11,7 @@ var current_health: int = 1
 
 # Movement
 var facing_direction: int = 1  # 1 = right, -1 = left
+var gravity_multiplier: float = 1.0
 
 # === INITIALIZATION ===
 func _ready():
@@ -22,7 +23,7 @@ func _ready():
 # Apply gravity to character
 func apply_gravity(delta: float) -> void:
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * delta * gravity_multiplier
 
 # Execute movement physics
 func apply_movement() -> void:

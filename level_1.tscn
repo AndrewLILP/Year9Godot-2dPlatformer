@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://w1fbkqmuwt5i"]
+[gd_scene load_steps=9 format=3 uid="uid://w1fbkqmuwt5i"]
 
 [ext_resource type="PackedScene" uid="uid://d3h7ycsgals16" path="res://platform.tscn" id="1_3hls8"]
 [ext_resource type="PackedScene" uid="uid://7cvj66i0k7" path="res://player.tscn" id="5_5hph3"]
@@ -6,10 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://cdvumpmkcd5gk" path="res://enemy.tscn" id="6_5hph3"]
 [ext_resource type="PackedScene" uid="uid://rtbc3538ywbe" path="res://hud.tscn" id="6_bjebc"]
 [ext_resource type="PackedScene" uid="uid://hgsb60p1hgs1" path="res://goal_box.tscn" id="6_j7kpp"]
+[ext_resource type="PackedScene" uid="uid://mskduxvueh8x" path="res://SideQuests/moving_platform_animatable_body_2d.tscn" id="7_j7kpp"]
+[ext_resource type="PackedScene" uid="uid://cyflqhx16ijuc" path="res://SideQuests/gravity_button.tscn" id="8_bjebc"]
 
 [node name="Level_1" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("5_5hph3")]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("5_5hph3")]
 position = Vector2(62, 63)
 
 [node name="Platform" parent="." instance=ExtResource("1_3hls8")]
@@ -32,3 +34,12 @@ position = Vector2(1406, 609)
 
 [node name="Coin2" parent="." instance=ExtResource("5_rka8t")]
 position = Vector2(1270, 614)
+
+[node name="MovingPlatformAnimatableBody2D" parent="." instance=ExtResource("7_j7kpp")]
+position = Vector2(560, 25)
+
+[node name="GravityButton" parent="." instance=ExtResource("8_bjebc")]
+position = Vector2(593, 472)
+
+[node name="GravityButton2" parent="." instance=ExtResource("8_bjebc")]
+position = Vector2(1032, 184)
