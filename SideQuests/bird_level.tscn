@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwk47xpnpi41q"]
+
+[ext_resource type="Script" uid="uid://d3x7ou58jibos" path="res://SideQuests/bird_level.gd" id="1_c7brq"]
+[ext_resource type="PackedScene" uid="uid://djvsydrcl1isl" path="res://SideQuests/bird_player.tscn" id="2_x2igf"]
+[ext_resource type="PackedScene" uid="uid://b5h0wc2t3l2uf" path="res://SideQuests/score_zone.tscn" id="3_c7brq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2igf"]
+size = Vector2(59, 20.443039)
+
+[node name="BirdLevel" type="Node2D"]
+script = ExtResource("1_c7brq")
+
+[node name="BirdPlayer" parent="." instance=ExtResource("2_x2igf")]
+position = Vector2(188, 295)
+
+[node name="Obstacle" type="StaticBody2D" parent="." groups=["obstacles"]]
+position = Vector2(644, 9)
+collision_layer = 9
+
+[node name="ScoreZone" parent="Obstacle" groups=["score_zones"] instance=ExtResource("3_c7brq")]
+position = Vector2(59, -35)
+scale = Vector2(0.32, 4.8800006)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle"]
+position = Vector2(19.5, 100.100006)
+scale = Vector2(1, 9.48)
+shape = SubResource("RectangleShape2D_x2igf")
+
+[node name="ColorRect" type="ColorRect" parent="Obstacle"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1, 5.08)
+
+[node name="Obstacle2" type="StaticBody2D" parent="." groups=["obstacles"]]
+position = Vector2(765, 397)
+collision_layer = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle2"]
+position = Vector2(19.5, 100.100006)
+scale = Vector2(1, 9.48)
+shape = SubResource("RectangleShape2D_x2igf")
+
+[node name="ColorRect" type="ColorRect" parent="Obstacle2"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1, 5.08)
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Score: 0"

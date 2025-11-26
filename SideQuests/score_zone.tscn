@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5h0wc2t3l2uf"]
+
+[ext_resource type="Script" uid="uid://3tdpwnnehs1y" path="res://SideQuests/score_zone.gd" id="1_pkl26"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3g53l"]
+size = Vector2(100, 20)
+
+[node name="ScoreZone" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_pkl26")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(59, 89)
+scale = Vector2(1, 8.559999)
+shape = SubResource("RectangleShape2D_3g53l")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
