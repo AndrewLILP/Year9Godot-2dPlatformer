@@ -1,15 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://cehk1rpr7qby4"]
 
-[ext_resource type="PackedScene" uid="uid://7cvj66i0k7" path="res://player.tscn" id="2_nmjpi"]
 [ext_resource type="PackedScene" uid="uid://d3h7ycsgals16" path="res://platform.tscn" id="3_1y8me"]
 [ext_resource type="PackedScene" uid="uid://hgsb60p1hgs1" path="res://goal_box.tscn" id="3_xdadj"]
 [ext_resource type="PackedScene" uid="uid://rtbc3538ywbe" path="res://hud.tscn" id="4_1y8me"]
+[ext_resource type="PackedScene" uid="uid://c2j5cexldg3p7" path="res://f_gplayer.tscn" id="5_0s5r2"]
 [ext_resource type="PackedScene" uid="uid://cxjxi4340jgef" path="res://coin.tscn" id="5_n7ypv"]
 
 [node name="Level_2" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource("2_nmjpi")]
-position = Vector2(38, -88)
 
 [node name="Platform" parent="." instance=ExtResource("3_1y8me")]
 position = Vector2(44, 395)
@@ -28,3 +25,15 @@ position = Vector2(522, 344)
 
 [node name="Coin2" parent="." instance=ExtResource("5_n7ypv")]
 position = Vector2(824, 642)
+
+[node name="FGplayer" parent="." instance=ExtResource("5_0s5r2")]
+position = Vector2(127, 80)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="GravityIndicator" type="Label" parent="."]
+offset_left = 1281.0
+offset_top = 195.0
+offset_right = 1398.0
+offset_bottom = 218.0
+text = "↓ FLOOR MODE"

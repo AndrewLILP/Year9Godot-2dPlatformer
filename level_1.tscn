@@ -39,6 +39,7 @@ position = Vector2(1270, 614)
 position = Vector2(560, 25)
 
 [node name="GravityButton" parent="." instance=ExtResource("8_bjebc")]
+visible = false
 position = Vector2(593, 472)
 
 [node name="GravityButton2" parent="." instance=ExtResource("8_bjebc")]

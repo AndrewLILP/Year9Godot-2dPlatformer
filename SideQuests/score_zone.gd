@@ -13,12 +13,12 @@ func _ready():
 
 # When player enters zone
 func _on_body_entered(body):
-	if not has_scored and "BirdPlayer" in body.name:
+	if not has_scored and "Player" in body.name:
 		print("SCORE!")
 		has_scored = true
 		scored.emit()
 
 # When player exits zone (reset for recycling)
 func _on_body_exited(body):
-	if "BirdPlayer" in body.name:
+	if "Player" in body.name:
 		has_scored = false

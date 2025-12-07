@@ -1,5 +1,5 @@
 # player.gd
-# Player-controlled character with jumping
+# Player-controlled character with jumping AND gravity flipping!
 # Inherits movement, health, and physics from Character
 extends Character
 
@@ -7,12 +7,9 @@ extends Character
 const SPEED = 300.0
 const JUMP_VELOCITY = -600.0
 
-# === GRAVITY MULTIPLIER ===
-# Allows external scripts (like gravity button) to flip gravity direction
-# 1.0 = normal downward gravity
-# -1.0 = flipped upward gravity
-# This variable is modified by the GravityButton script
-#var gravity_multiplier: float = 1.0
+# === GRAVITY FLIP TRACKING ===
+# Track whether F key was pressed last frame (prevents multiple flips)
+var _f_key_was_pressed: bool = false
 
 # === INITIALIZATION ===
 func _ready():
@@ -23,27 +20,40 @@ func _ready():
 	max_health = 3
 	current_health = 3
 	
-	# ★ NEW: Register with GameManager
+	# ★ Register with GameManager
 	GameManager.register_player(self)
 	
 	print("Player initialized:")
 	print("  - Health: ", max_health, " hearts")
 	print("  - Speed: ", SPEED)
 	print("  - Jump Power: ", abs(JUMP_VELOCITY))
+	print("  - Press F to flip gravity!")
 	
-	# === REMOVED: Goal detection (GoalBox handles this now!)
-	# OLD CODE - DELETE THIS IF YOU HAVE IT:
-	# if get_parent().has_node("GoalBox"):
-	#     var goal_box = get_parent().get_node("GoalBox")
-	#     goal_box.body_entered.connect(_on_goal_box_body_entered)
+	# ★ Initialize gravity UI
+	_update_gravity_ui()
 
 # === PLAYER PHYSICS ===
 func _physics_process(delta):
+	# --- GRAVITY FLIP INPUT ---
+	# Check if F key is currently pressed
+	var f_key_pressed = Input.is_key_pressed(KEY_F)
+	
+	# Only flip if F is pressed NOW but WASN'T pressed last frame
+	# This means the player just pressed it (not holding)
+	if f_key_pressed and not _f_key_was_pressed:
+		_toggle_gravity()
+	
+	# Remember F key state for next frame
+	_f_key_was_pressed = f_key_pressed
+	
 	# --- GRAVITY (from Character parent) ---
 	apply_gravity(delta)
 	
-	# --- ★ JUMP (player-specific) ---
+	# --- JUMP (player-specific) ---
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		# ★ Jump direction automatically flips with gravity!
+		# When gravity_multiplier = -1, jump becomes positive (downward jump)
+		# When gravity_multiplier = 1, jump is negative (upward jump)
 		velocity.y = JUMP_VELOCITY * gravity_multiplier
 		print("🦘 Jump!")
 	
@@ -79,14 +89,48 @@ func _physics_process(delta):
 	# --- EXECUTE MOVEMENT (from Character parent) ---
 	apply_movement()
 
-# === REMOVED: Goal detection function
-# OLD CODE - DELETE THIS IF YOU HAVE IT:
-# func _on_goal_box_body_entered(body):
-#     if body == self:
-#         print("Level Complete!")
-#         get_tree().change_scene_to_file("res://level_2.tscn")
+# === GRAVITY FLIP FUNCTION ===
+# Toggles gravity between normal (downward) and flipped (upward)
+func _toggle_gravity() -> void:
+	# Flip the multiplier: 1.0 becomes -1.0, -1.0 becomes 1.0
+	gravity_multiplier *= -1
+	
+	# ★ Update the HUD indicator
+	_update_gravity_ui()
+	
+	# ★ IMPORTANT: If player is on ground/ceiling, give them a push to get airborne!
+	# Otherwise they'll be stuck to the platform
+	
+	if gravity_multiplier == -1.0:
+		# Gravity just flipped to UPWARD
+		print("🔄 GRAVITY FLIPPED! Player now falls UPWARD!")
+		
+		# If standing on floor, push them up to start upward fall
+		if is_on_floor():
+			velocity.y = -200.0  # Small upward velocity to "unstick" from floor
+			print("   Pushed player off floor to start upward fall")
+	
+	else:
+		# Gravity just flipped back to NORMAL (downward)
+		print("🔄 GRAVITY NORMAL! Player now falls DOWNWARD!")
+		
+		# If stuck to ceiling, push them down to start downward fall
+		if is_on_ceiling():
+			velocity.y = 200.0  # Small downward velocity to "unstick" from ceiling
+			print("   Pushed player off ceiling to start downward fall")
 
-# === ★ NEW: Custom Death Behavior ===
+# === UPDATE GRAVITY UI ===
+# Tells the HUD to update the gravity indicator
+func _update_gravity_ui() -> void:
+	# Find the HUD (it's a CanvasLayer, so it's accessible from anywhere)
+	var hud = get_tree().get_first_node_in_group("hud")
+	
+	if hud and hud.has_method("update_gravity"):
+		hud.update_gravity(gravity_multiplier)
+	else:
+		print("⚠️ WARNING: HUD not found or doesn't have update_gravity method")
+
+# === CUSTOM DEATH BEHAVIOR ===
 # Override parent's die() function
 func die() -> void:
 	print("💀 Player died!")
